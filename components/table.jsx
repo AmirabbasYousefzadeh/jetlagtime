@@ -49,11 +49,7 @@ function Table() {
   useEffect(() => {
     const updateTimes = () => {
       const newTimes = {};
-      // Include user's location if available
-      const allCities = userLocation
-        ? [userLocation, ...cities]
-        : cities;
-
+      const allCities = userLocation ? [userLocation, ...cities] : cities;
       allCities.forEach((c) => {
         newTimes[c.city] = DateTime.now()
           .setZone(c.zone)
@@ -70,14 +66,14 @@ function Table() {
   const allRows = userLocation ? [userLocation, ...cities] : cities;
 
   return (
-    <div className="h-auto px-[58px] py-4">
+    <div className="w-full px-4 sm:px-6 md:px-10 py-6">
       <div className="border rounded-xl border-white/10 bg-white/70 shadow-sm backdrop-blur-md overflow-hidden">
         {/* Header */}
-        <div className="h-10 border-b border-b-[#DFDDD9] flex bg-white/40 font-semibold text-gray-700">
-          <div className="w-[600px] border-r border-r-[#DFDDD9] flex items-center justify-center">
+        <div className="grid grid-cols-2 border-b border-b-[#DFDDD9] bg-white/40 font-semibold text-gray-700 text-sm sm:text-base">
+          <div className="flex items-center justify-center py-3 border-r border-r-[#DFDDD9]">
             Country / City
           </div>
-          <div className="w-[600px] flex items-center justify-center">
+          <div className="flex items-center justify-center py-3">
             Local Time
           </div>
         </div>
@@ -86,19 +82,25 @@ function Table() {
         {allRows.map((c, index) => (
           <div
             key={c.city}
-            className={`h-10 flex border-b border-b-[#DFDDD9] ${
-              index % 2 === 0 ? "bg-white/50" : "bg-white/30"
-            } ${userLocation && index === 0 ? "font-semibold text-teal-700" : ""}`}
+            className={`grid grid-cols-2 text-sm sm:text-base border-b border-b-[#DFDDD9] 
+              ${index % 2 === 0 ? "bg-white/50" : "bg-white/30"} 
+              ${userLocation && index === 0 ? "font-semibold text-teal-700" : ""}
+              `}
           >
-            <div className="w-[600px] border-r border-r-[#DFDDD9] flex items-center justify-center text-gray-800">
+            <div className="flex items-center justify-center py-2 px-2 border-r border-r-[#DFDDD9] text-gray-800 text-center">
               {c.country} — {c.city}
             </div>
-            <div className="w-[600px] flex items-center justify-center text-gray-900 font-mono">
+            <div className="flex items-center justify-center py-2 px-2 text-gray-900 font-mono text-center">
               {times[c.city] || "--:--:--"}
             </div>
           </div>
         ))}
       </div>
+
+      {/* Responsive hint on small devices */}
+      <p className="text-xs text-gray-500 text-center mt-3 sm:hidden">
+        Swipe → to view all cities
+      </p>
     </div>
   );
 }

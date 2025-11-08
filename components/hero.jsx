@@ -39,10 +39,18 @@ export default function Hero() {
   const digits = time.split("");
 
   return (
-    <section className="mt-9 flex bg-[#DFDDD9] items-center justify-center h-[190px] bg-gradient-to-b font-[Saira] text-black">
-      <div className="flex">
+    <section className="mt-6 flex items-center justify-center bg-[#DFDDD9] bg-gradient-to-b from-[#E1E0DC] to-[#DFDDD9] font-[Saira] text-black h-[120px] sm:h-[160px] md:h-[190px] lg:h-[220px]">
+      <div className="flex flex-wrap justify-center">
         {digits.map((digit, i) => (
-          <div key={i} className="relative w-[150px] h-[190px] overflow-hidden flex justify-center items-center">
+          <div
+            key={i}
+            className="relative flex justify-center items-center 
+                       w-[60px] h-[100px]
+                       sm:w-[90px] sm:h-[130px]
+                       md:w-[120px] md:h-[160px]
+                       lg:w-[150px] lg:h-[190px]
+                       overflow-hidden"
+          >
             <AnimatePresence mode="wait">
               <motion.span
                 key={digit}
@@ -50,7 +58,8 @@ export default function Hero() {
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: 150, opacity: 0 }}
                 transition={{ duration: 0.35, ease: "easeInOut" }}
-                className="absolute text-[260px] font-semibold leading-none select-none"
+                className="absolute select-none font-semibold leading-none
+                           text-[120px] sm:text-[180px] md:text-[220px] lg:text-[260px]"
               >
                 {digit}
               </motion.span>
